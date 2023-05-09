@@ -12,7 +12,7 @@ class Contact(Base):
     name = Column(String(50), nullable=False, index=True)
     surname = Column(String(50), nullable=False, index=True)
     email = Column(String(100), unique=True, index=True)
-    mobile = Column(Integer, nullable=True)
+    mobile = Column(String, nullable=True, index=True)
     date_of_birth = Column(Date)
     created_at = Column(DateTime, default=func.now())
     updated_at = Column(DateTime, default=func.now(), onupdate=func.now())
