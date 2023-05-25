@@ -55,8 +55,13 @@ class UserResponse(BaseModel):
     user: UserDb
     detail: str = "User has been created"
 
+
 class TokenModel(BaseModel):
     access_token: str
     refresh_token: str
     token_type: str = "bearer"
+
+
+class RequestEmail(BaseModel):
+    email: EmailStr
 
