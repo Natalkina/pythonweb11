@@ -21,6 +21,7 @@ class Contact(Base):
 class User(Base):
     __tablename__ = "users"
     id = Column(Integer, primary_key=True)
+    username = Column(String(150), nullable=False)
     email = Column(String(150), nullable=False, unique=True)
     password = Column(String(255), nullable=False)
     refresh_token = Column(String(255), nullable=True)

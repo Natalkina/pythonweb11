@@ -37,6 +37,16 @@ app.add_middleware(
 
 @app.middleware("http")
 async def add_process_time_header(request: Request, call_next):
+
+    """
+    The add_process_time_header function is a middleware function that adds the time it took to process
+    the request in seconds;.
+
+    :param request: Request: Get the request object
+    :param call_next: Call the next function in the pipeline
+    :return: The response object with a new header called &quot;process-time&quot;
+
+    """
     start_time = time.time()
     response = await call_next(request)
     process_time = time.time() - start_time
@@ -45,17 +55,36 @@ async def add_process_time_header(request: Request, call_next):
 
 @app.on_event("startup")
 async def startup():
+
+    """
+    The startup function is used for limiting the number of requests .
+
+    """
     r = await redis.Redis(host=settings.redis_host, port=settings.redis_port, db=0, encoding="utf-8",
                           decode_responses=True)
     await FastAPILimiter.init(r)
 
 @app.get('/')
 async def root():
+
+    """
+    The root function is the entry point for the API.
+    It returns a simple message to let you know that it works.
+
+    """
     return {'message': "Hello, if you see this message it is great"}
 
 
 @app.get("/api/healthchecker")
 def healthchecker(db: Session = Depends(get_db)):
+
+    """
+    The healthchecker function is a simple function that checks if the database is configured correctly.
+
+    :param db: Session: Pass the database session to the function
+    :return: A dict with a message key
+
+    """
     try:
         result = db.execute(text("SELECT 1")).fetchone()
         print(result)

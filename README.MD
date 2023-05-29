@@ -16,3 +16,14 @@ MAIL_PASSWORD=
 MAIL_FROM=${MAIL_USERNAME}  
 MAIL_PORT=  
 MAIL_SERVER=
+
+'''
+
+Start tests
+
+'''bash
+pytest --cov=. --cov-report html tests/
+'''
+
+
+
